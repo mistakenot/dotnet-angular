@@ -9,7 +9,8 @@ namespace Server.Models
         public string Email { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }
-        public List<EmailAddress> EmailAddresses { get; set;  }
+        public List<EmailAddress> EmailAddresses { get; set; }
+        public List<EmailHeader> EmailHeaders { get; set; }
 
     }
 }

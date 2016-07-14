@@ -26,12 +26,12 @@ namespace Server.Services
             }
         }
 
-        public async Task<IEnumerable<EmailHeader>> GetEmailHeaders(int userId, int pageSize, int pageCount)
+        public async Task<IEnumerable<EmailHeader>> GetEmailHeaders(int accountId, int pageSize, int pageCount)
         {
             using (var db = _dbFactory.Create())
             {
                 return await db.EmailHeaders
-                    .Where(eh => eh.UserId == userId && eh.DeletedAt == null)
+                    .Where(eh => eh.AccountId == accountId && eh.DeletedAt == null)
                     .OrderByDescending(eh => eh.Id)
                     .Skip(pageSize * pageCount)
                     .Take(pageCount)

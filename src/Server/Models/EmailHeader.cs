@@ -4,7 +4,7 @@ namespace Server.Models
 {
     public class EmailHeader : Entity
     {
-        public int UserId { get; set; }
+        public int AccountId { get; set; }
 
         public string Subject { get; set; }
         public string To { get; set; }
@@ -12,6 +12,7 @@ namespace Server.Models
         public string ContentSample { get; set; }
 
         public EmailContent EmailContent { get; set; }
+        public Account Account{ get; set; }
 
     }
 }

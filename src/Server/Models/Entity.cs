@@ -11,5 +11,15 @@ namespace Server.Models
         {
             DeletedAt = null;
         }
+
+        public override bool Equals(object that)
+        {
+            if (that is Entity)
+            {
+                return this.Id == (that as Entity).Id;
+            }
+
+            return base.Equals(that);
+        }
     }
 }
