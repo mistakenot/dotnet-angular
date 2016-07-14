@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace Server.Models
 {
@@ -8,6 +9,7 @@ namespace Server.Models
 
         public string Content { get; set; }
 
+        [JsonIgnore]
         public EmailHeader EmailHeader { get; set; }
     }
 }

@@ -34,7 +34,7 @@ namespace Server.Services
                     .Where(eh => eh.AccountId == accountId && eh.DeletedAt == null)
                     .OrderByDescending(eh => eh.Id)
                     .Skip(pageSize * pageCount)
-                    .Take(pageCount)
+                    .Take(pageSize)
                     .ToListAsync();
             }
         }

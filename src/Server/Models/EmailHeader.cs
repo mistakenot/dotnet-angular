@@ -1,4 +1,5 @@
 using System;
+using Newtonsoft.Json;
 
 namespace Server.Models
 {
@@ -11,7 +12,9 @@ namespace Server.Models
         public string From { get; set; }
         public string ContentSample { get; set; }
 
+        [JsonIgnore]
         public EmailContent EmailContent { get; set; }
+        [JsonIgnore]
         public Account Account{ get; set; }
 
     }

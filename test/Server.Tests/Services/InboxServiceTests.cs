@@ -2,36 +2,52 @@ using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Server.Services;
+using Server.Data;
+using System;
+using Microsoft.EntityFrameworkCore;
+using Server.Models;
+using Newtonsoft.Json;
 
 namespace Server.Tests.Services
 {
-    public class InboxServiceTests : IClassFixture<DatabaseFixture>
+    public class InboxServiceTests : IClassFixture<TestDbFactory>
     {
-        private readonly DatabaseFixture _databaseFixture;
-        private readonly IInboxService _inboxService;
-        private static Dataset _dataset = new Dataset();
+        private TestDbFactory dbFactory;
+        private InboxService inboxService;
 
-        public InboxServiceTests(
-            DatabaseFixture databaseFixture)
+        public InboxServiceTests(TestDbFactory dbFactory)
         {
-            _databaseFixture = databaseFixture;
-            _databaseFixture.DatabaseFactory.WithData(_dataset.Apply);
-            _inboxService = new InboxService(_databaseFixture.DatabaseFactory);
+            this.dbFactory = dbFactory;
+            inboxService = new InboxService(dbFactory);
+
+            var account = new Account();
+            var emailHeader = new EmailHeader() { Account = account };
+            var emailContent = new EmailContent()
+            {
+                Content = "content",
+                EmailHeader = emailHeader
+            };
+
+            using (var db = dbFactory.Create())
+            {
+                db.EmailContents.Add(emailContent);
+                db.SaveChanges();
+            }
         }
 
         [Fact]
         public async Task CanGetEmailContent()
         {
-            var model = _dataset.EmailContent_1;
-
-            Assert.Equal(default(int), model.Id);
-            Assert.Equal(1, _databaseFixture.DatabaseFactory.Create().Accounts.Count());
-            var result = await _inboxService.GetEmailContent(2);
-
-            Assert.NotNull(result);
-            Assert.Equal(model.Content, result.Content);
-            Assert.Equal(model.EmailHeader, result.EmailHeader);
+            var actual = await inboxService.GetEmailContent(1);
+            Assert.NotNull(actual);
+            Assert.Equal("content", actual.Content);
         }
 
+        [Fact]
+        public async Task CanGetEmailHeader()
+        {
+            var actual = await inboxService.GetEmailHeaders(2, 10, 0);
+            Assert.NotEmpty(actual);
+        }
     }
 }
