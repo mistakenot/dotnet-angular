@@ -2,7 +2,7 @@ using System;
 
 namespace Server.Models
 {
-    public abstract class Entity
+    public abstract class Entity : IEntity
     {
         public int Id { get; set; }
         public DateTime? DeletedAt { get; set; }
@@ -21,5 +21,17 @@ namespace Server.Models
 
             return base.Equals(that);
         }
+    }
+
+    public interface IEntity
+    {
+        int Id { get; }
+
+        DateTime? DeletedAt { get; }
+    }
+
+    public interface IOwnedEntity : IEntity
+    {
+        int AccountId { get; }
     }
 }

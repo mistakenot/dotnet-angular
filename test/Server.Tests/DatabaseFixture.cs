@@ -24,7 +24,7 @@ namespace Server.Tests
         }
     }
 
-    public class TestDbFactory : IDbFactory, IDisposable
+    public class DatabaseFixture : IDbFactory, IDisposable
     {
         public ApplicationDbContext Create()
         {

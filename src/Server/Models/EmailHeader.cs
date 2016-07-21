@@ -3,7 +3,7 @@ using Newtonsoft.Json;
 
 namespace Server.Models
 {
-    public class EmailHeader : Entity
+    public class EmailHeader : Entity, IOwnedEntity
     {
         public int AccountId { get; set; }
 

@@ -1,38 +1,19 @@
-using System.Linq;
 using System.Threading.Tasks;
 using Xunit;
 using Server.Services;
-using Server.Data;
-using System;
-using Microsoft.EntityFrameworkCore;
-using Server.Models;
-using Newtonsoft.Json;
+using System.Linq;
 
 namespace Server.Tests.Services
 {
-    public class InboxServiceTests : IClassFixture<TestDbFactory>
+    public class InboxServiceTests : IClassFixture<DatabaseFixture>
     {
-        private TestDbFactory dbFactory;
+        private DatabaseFixture dbFactory;
         private InboxService inboxService;
 
-        public InboxServiceTests(TestDbFactory dbFactory)
+        public InboxServiceTests(DatabaseFixture dbFactory)
         {
-            this.dbFactory = dbFactory;
+            this.dbFactory = dbFactory.WithBasicData();
             inboxService = new InboxService(dbFactory);
-
-            var account = new Account();
-            var emailHeader = new EmailHeader() { Account = account };
-            var emailContent = new EmailContent()
-            {
-                Content = "content",
-                EmailHeader = emailHeader
-            };
-
-            using (var db = dbFactory.Create())
-            {
-                db.EmailContents.Add(emailContent);
-                db.SaveChanges();
-            }
         }
 
         [Fact]
@@ -48,6 +29,7 @@ namespace Server.Tests.Services
         {
             var actual = await inboxService.GetEmailHeaders(2, 10, 0);
             Assert.NotEmpty(actual);
+            Assert.Equal(1, actual.Count());
         }
     }
 }

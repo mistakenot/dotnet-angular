@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Server.Data;
 using Server.Models;
 using Microsoft.EntityFrameworkCore;
+using Server.Tools;
 
 namespace Server.Services
 {
@@ -31,7 +32,7 @@ namespace Server.Services
             using (var db = _dbFactory.Create())
             {
                 return await db.EmailHeaders
-                    .Where(eh => eh.AccountId == accountId && eh.DeletedAt == null)
+                    .Query(accountId)
                     .OrderByDescending(eh => eh.Id)
                     .Skip(pageSize * pageCount)
                     .Take(pageSize)

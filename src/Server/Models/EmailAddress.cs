@@ -2,7 +2,7 @@ using System;
 
 namespace Server.Models
 {
-    public class EmailAddress : Entity
+    public class EmailAddress : Entity, IOwnedEntity
     {
         public int AccountId { get; set; }
 
