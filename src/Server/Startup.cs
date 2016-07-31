@@ -48,6 +48,7 @@ namespace Server
                 .AddDefaultTokenProviders();
 
             services.AddMvc();
+            services.AddRouting();
 
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
