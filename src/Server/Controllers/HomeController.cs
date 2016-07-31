@@ -14,7 +14,7 @@ namespace Server.Controllers
             {
                 Response.Redirect("~/Inbox");
             }
-            
+
             return View();
         }
 

@@ -13,6 +13,7 @@ using Server.Services;
 namespace Server.Controllers
 {
     [Authorize]
+    [Route("/Manage")]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -38,6 +39,7 @@ namespace Server.Controllers
         //
         // GET: /Manage/Index
         [HttpGet]
+        [Route("/")]
         public async Task<IActionResult> Index(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
@@ -68,6 +70,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]
+        [Route("RemoveLogin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel account)
         {
@@ -87,6 +90,8 @@ namespace Server.Controllers
 
         //
         // GET: /Manage/AddPhoneNumber
+        [HttpGet]
+        [Route("AddPhoneNumber")]
         public IActionResult AddPhoneNumber()
         {
             return View();
@@ -95,6 +100,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/AddPhoneNumber
         [HttpPost]
+        [Route("AddPhoneNumber")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> AddPhoneNumber(AddPhoneNumberViewModel model)
         {
@@ -116,6 +122,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/EnableTwoFactorAuthentication
         [HttpPost]
+        [Route("EnableTwoFactorAuthentication")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> EnableTwoFactorAuthentication()
         {
@@ -132,6 +139,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/DisableTwoFactorAuthentication
         [HttpPost]
+        [Route("DisableTwoFactorAuthentication")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DisableTwoFactorAuthentication()
         {
@@ -148,6 +156,7 @@ namespace Server.Controllers
         //
         // GET: /Manage/VerifyPhoneNumber
         [HttpGet]
+        [Route("VerifyPhoneNumber")]
         public async Task<IActionResult> VerifyPhoneNumber(string phoneNumber)
         {
             var user = await GetCurrentUserAsync();
@@ -163,6 +172,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/VerifyPhoneNumber
         [HttpPost]
+        [Route("VerifyPhoneNumber")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyPhoneNumber(VerifyPhoneNumberViewModel model)
         {
@@ -188,6 +198,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/RemovePhoneNumber
         [HttpPost]
+        [Route("RemovePhoneNumber")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemovePhoneNumber()
         {
@@ -207,6 +218,7 @@ namespace Server.Controllers
         //
         // GET: /Manage/ChangePassword
         [HttpGet]
+        [Route("ChangePassword")]
         public IActionResult ChangePassword()
         {
             return View();
@@ -215,6 +227,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/ChangePassword
         [HttpPost]
+        [Route("ChangePassword")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
         {
@@ -241,6 +254,7 @@ namespace Server.Controllers
         //
         // GET: /Manage/SetPassword
         [HttpGet]
+        [Route("SetPassword")]
         public IActionResult SetPassword()
         {
             return View();
@@ -249,6 +263,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/SetPassword
         [HttpPost]
+        [Route("SetPassword")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
         {
@@ -274,6 +289,7 @@ namespace Server.Controllers
 
         //GET: /Manage/ManageLogins
         [HttpGet]
+        [Route("ManageLogins")]
         public async Task<IActionResult> ManageLogins(ManageMessageId? message = null)
         {
             ViewData["StatusMessage"] =
@@ -299,6 +315,7 @@ namespace Server.Controllers
         //
         // POST: /Manage/LinkLogin
         [HttpPost]
+        [Route("LinkLogin")]
         [ValidateAntiForgeryToken]
         public IActionResult LinkLogin(string provider)
         {
@@ -311,6 +328,7 @@ namespace Server.Controllers
         //
         // GET: /Manage/LinkLoginCallback
         [HttpGet]
+        [Route("LinkLoginCallback")]
         public async Task<ActionResult> LinkLoginCallback()
         {
             var user = await GetCurrentUserAsync();

@@ -15,6 +15,7 @@ using Server.Services;
 namespace Server.Controllers
 {
     [Authorize]
+    [Route("/Account")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -40,6 +41,7 @@ namespace Server.Controllers
         //
         // GET: /Account/Login
         [HttpGet]
+        [Route("Login")]
         [AllowAnonymous]
         public IActionResult Login(string returnUrl = null)
         {
@@ -50,6 +52,7 @@ namespace Server.Controllers
         //
         // POST: /Account/Login
         [HttpPost]
+        [Route("Login")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
@@ -88,6 +91,7 @@ namespace Server.Controllers
         //
         // GET: /Account/Register
         [HttpGet]
+        [Route("Register")]
         [AllowAnonymous]
         public IActionResult Register(string returnUrl = null)
         {
@@ -98,6 +102,7 @@ namespace Server.Controllers
         //
         // POST: /Account/Register
         [HttpPost]
+        [Route("Register")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
@@ -129,6 +134,7 @@ namespace Server.Controllers
         //
         // POST: /Account/LogOff
         [HttpPost]
+        [Route("LogOff")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> LogOff()
         {
@@ -140,6 +146,7 @@ namespace Server.Controllers
         //
         // POST: /Account/ExternalLogin
         [HttpPost]
+        [Route("ExternalLogin")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public IActionResult ExternalLogin(string provider, string returnUrl = null)
@@ -153,6 +160,7 @@ namespace Server.Controllers
         //
         // GET: /Account/ExternalLoginCallback
         [HttpGet]
+        [Route("ExternalLoginCallback")]
         [AllowAnonymous]
         public async Task<IActionResult> ExternalLoginCallback(string returnUrl = null, string remoteError = null)
         {
@@ -195,6 +203,7 @@ namespace Server.Controllers
         //
         // POST: /Account/ExternalLoginConfirmation
         [HttpPost]
+        [Route("ExternalLoginConfirmation")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginConfirmationViewModel model, string returnUrl = null)
@@ -228,6 +237,7 @@ namespace Server.Controllers
 
         // GET: /Account/ConfirmEmail
         [HttpGet]
+        [Route("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string code)
         {
@@ -247,6 +257,7 @@ namespace Server.Controllers
         //
         // GET: /Account/ForgotPassword
         [HttpGet]
+        [Route("ForgotPassword")]
         [AllowAnonymous]
         public IActionResult ForgotPassword()
         {
@@ -256,6 +267,7 @@ namespace Server.Controllers
         //
         // POST: /Account/ForgotPassword
         [HttpPost]
+        [Route("ForgetPassword")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
@@ -285,6 +297,7 @@ namespace Server.Controllers
         //
         // GET: /Account/ForgotPasswordConfirmation
         [HttpGet]
+        [Route("ForgotPasswordConfirmation")]
         [AllowAnonymous]
         public IActionResult ForgotPasswordConfirmation()
         {
@@ -294,6 +307,7 @@ namespace Server.Controllers
         //
         // GET: /Account/ResetPassword
         [HttpGet]
+        [Route("ResetPassword")]
         [AllowAnonymous]
         public IActionResult ResetPassword(string code = null)
         {
@@ -303,6 +317,7 @@ namespace Server.Controllers
         //
         // POST: /Account/ResetPassword
         [HttpPost]
+        [Route("ResetPassword")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
@@ -329,6 +344,7 @@ namespace Server.Controllers
         //
         // GET: /Account/ResetPasswordConfirmation
         [HttpGet]
+        [Route("ResetPasswordConfirmation")]
         [AllowAnonymous]
         public IActionResult ResetPasswordConfirmation()
         {
@@ -338,6 +354,7 @@ namespace Server.Controllers
         //
         // GET: /Account/SendCode
         [HttpGet]
+        [Route("SendCode")]
         [AllowAnonymous]
         public async Task<ActionResult> SendCode(string returnUrl = null, bool rememberMe = false)
         {
@@ -354,6 +371,7 @@ namespace Server.Controllers
         //
         // POST: /Account/SendCode
         [HttpPost]
+        [Route("SendCode")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> SendCode(SendCodeViewModel model)
@@ -392,6 +410,7 @@ namespace Server.Controllers
         //
         // GET: /Account/VerifyCode
         [HttpGet]
+        [Route("VerifyCode")]
         [AllowAnonymous]
         public async Task<IActionResult> VerifyCode(string provider, bool rememberMe, string returnUrl = null)
         {
@@ -407,6 +426,7 @@ namespace Server.Controllers
         //
         // POST: /Account/VerifyCode
         [HttpPost]
+        [Route("VerifyCode")]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> VerifyCode(VerifyCodeViewModel model)
