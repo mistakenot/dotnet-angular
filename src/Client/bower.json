@@ -1,0 +1,21 @@
+{
+  "name": "client",
+  "description": "",
+  "main": "",
+  "authors": [
+    "charlie <the_charlie_daly@hotmail.co.uk>"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "private": true,
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "bootstrap": "^3.3.7"
+  }
+}

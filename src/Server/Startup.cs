@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Server.Data;
 using Server.Models;
 using Server.Services;
+using Swashbuckle.Swagger.Model;
 
 namespace Server
 {
@@ -41,7 +42,7 @@ namespace Server
         {
             // Add framework services.
             services.AddDbContext<ApplicationDbContext>(options =>
-                options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
+                options.UseInMemoryDatabase());
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
@@ -53,8 +54,12 @@ namespace Server
             // Add application services.
             services.AddTransient<IEmailSender, AuthMessageSender>();
             services.AddTransient<ISmsSender, AuthMessageSender>();
+            services.AddTransient<IAccountIdProvider, UserManagerAccountIdProvider>();
 
-            services.AddSwaggerGen();
+            services.AddSwaggerGen(c =>
+            {
+                c.AddSecurityDefinition("basic", new BasicAuthScheme());
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -80,12 +85,7 @@ namespace Server
 
             // Add external authentication middleware below. To configure them please see https://go.microsoft.com/fwlink/?LinkID=532715
 
-            app.UseMvc(routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-            });
+            app.UseMvc();
 
             app.UseSwagger();
             app.UseSwaggerUi();

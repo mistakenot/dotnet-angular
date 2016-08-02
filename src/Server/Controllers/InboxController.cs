@@ -32,7 +32,7 @@ namespace Server.Controllers
         }
 
         [HttpGet]
-        [Route("Content")]
+        [Route("Content/{id:int}")]
         public async Task<EmailContent> GetEmailContents(int id)
         {
             return await _inboxService.GetEmailContent(id);

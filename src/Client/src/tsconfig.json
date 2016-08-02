@@ -1,0 +1,40 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "declaration": false,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "mapRoot": "/",
+    "module": "commonjs",
+    "moduleResolution": "node",
+    "noEmitOnError": true,
+    "noImplicitAny": false,
+    "outDir": "../dist/",
+    "rootDir": ".",
+    "sourceMap": true,
+    "target": "es5",
+    "inlineSources": true
+  },
+  "filesGlob": [
+    "./**/*.ts",
+    "!node_modules/**/*.ts"
+  ],
+  "files": [
+    "./app/app.component.spec.ts",
+    "./app/app.component.ts",
+    "./app/environment.ts",
+    "./app/index.ts",
+    "./app/nav/nav-bar/index.ts",
+    "./app/nav/nav-bar/nav-bar.component.spec.ts",
+    "./app/nav/nav-bar/nav-bar.component.ts",
+    "./app/services/auth.service.spec.ts",
+    "./app/services/auth.service.ts",
+    "./app/shared/index.ts",
+    "./main.ts",
+    "./system-config.ts",
+    "./typings.d.ts"
+  ],
+  "atom": {
+    "rewriteTsconfig": true
+  }
+}

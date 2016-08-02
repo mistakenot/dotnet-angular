@@ -42,13 +42,9 @@ namespace Server.Services
         }
 
 
-        public Task<IEnumerable<string>> GetAddressRecommendations()
+        public async Task<IEnumerable<string>> GetAddressRecommendations()
         {
-            return GetAddressRecommendations();
-        }
-
-        private async Task<IEnumerable<string>> GetAddressRecommendationsInternal(int accumulator = 0)
-        {
+            //return Enumerable.Empty<string>();
             // Generate a few random addresses
             var rnd = new Random();
             var suggestions = Enumerable.Range(0, 5)
@@ -62,20 +58,7 @@ namespace Server.Services
                     .Select(e => e.Address)
                     .ToListAsync();
 
-                var okSuggestions = suggestions.Where(s => !existingSuggestions.Contains(s));
-
-                if (!okSuggestions.Any())
-                {
-                    if (accumulator++ > SuggestionRetries)
-                    {
-                        // To prevent overflow
-                        return Enumerable.Empty<string>();
-                    }
-
-                    return await GetAddressRecommendationsInternal(accumulator);
-                }
-
-                return okSuggestions;
+                return suggestions.Where(s => !existingSuggestions.Contains(s));
 
             }
         }
