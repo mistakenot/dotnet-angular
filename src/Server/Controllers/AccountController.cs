@@ -89,6 +89,49 @@ namespace Server.Controllers
         }
 
         //
+        // POST: /Account/Login
+        [HttpPost]
+        [Route("ApiLogin")]
+        [AllowAnonymous] //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApiLogin([FromBody]LoginViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                // This doesn't count login failures towards account lockout
+                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation(1, "User logged in.");
+                    return Ok(User.Identity.Name);
+                }
+                else
+                {
+                    return NotFound(model.Email);
+                }
+
+                if (result.RequiresTwoFactor)
+                {
+                    return BadRequest("Requires two factor authentication.");
+                }
+                if (result.IsLockedOut)
+                {
+                    _logger.LogWarning(2, "User account locked out.");
+                    return BadRequest("User account is locked out.");
+                }
+                else
+                {
+                    ModelState.AddModelError(string.Empty, "Invalid login attempt.");
+                    return BadRequest(ModelState);
+                }
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest(ModelState);
+        }
+
+        //
         // GET: /Account/Register
         [HttpGet]
         [Route("Register")]
@@ -129,6 +172,37 @@ namespace Server.Controllers
 
             // If we got this far, something failed, redisplay form
             return View(model);
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [Route("ApiRegister")]
+        [AllowAnonymous] //[ValidateAntiForgeryToken]
+        public async Task<IActionResult> ApiRegister([FromBody]RegisterViewModel model, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var result = await _userManager.CreateAsync(user, model.Password);
+                if (result.Succeeded)
+                {
+                    // For more information on how to enable account confirmation and password reset please visit https://go.microsoft.com/fwlink/?LinkID=532713
+                    // Send an email with this link
+                    //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                    //var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
+                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation(3, "User created a new account with password.");
+                    return Ok(user.Claims);
+                }
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return BadRequest(model);
         }
 
         //

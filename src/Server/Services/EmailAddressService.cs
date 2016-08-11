@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Server.Data;
 using Server.Models;
-using Server.Tools;
 using Microsoft.EntityFrameworkCore;
 
 namespace Server.Services

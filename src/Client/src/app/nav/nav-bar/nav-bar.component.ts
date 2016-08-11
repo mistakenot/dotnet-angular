@@ -30,4 +30,8 @@ export class NavBarComponent implements OnInit {
       this.authService.login(this.email, this.password);
   }
 
+  logoutWithEmail() {
+      this.authService.logout();
+  }
+
 }
