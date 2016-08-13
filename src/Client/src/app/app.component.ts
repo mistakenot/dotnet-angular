@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavBarComponent } from './nav/nav-bar'
 import { AuthService, MockAuthService } from './services/auth.service';
+import { LogService, ILogService, ConsoleLogService } from './services/log.service';
 
 @Component({
   moduleId: module.id,
@@ -8,7 +9,10 @@ import { AuthService, MockAuthService } from './services/auth.service';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.css'],
   directives: [NavBarComponent],
-  providers: [{ provide: AuthService, useClass: MockAuthService}]
+  providers: [
+      { provide: AuthService, useClass: MockAuthService },
+      { provide: LogService, useClass: ConsoleLogService }
+  ]
 })
 export class AppComponent {
   title = 'app works!';

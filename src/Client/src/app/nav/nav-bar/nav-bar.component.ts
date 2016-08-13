@@ -12,26 +12,46 @@ import { AuthService, IAuthService } from '../../services/auth.service';
 export class NavBarComponent implements OnInit {
     loggedIn: Observable<boolean>
 
-    email: string
-    password: string
+    email: string;
+    password: string;
+    isError: boolean;
+    errorMsg: string;
 
   constructor(
       private authService: AuthService
   ) {
-      this.loggedIn = authService.loggedIn
-      this.email = ""
-      this.password = ""
+      this.loggedIn = authService.loggedIn;
+      this.resetForm();
   }
 
   ngOnInit() {
   }
 
   loginWithEmail() {
-      this.authService.login(this.email, this.password);
+      this.authService.login(this.email, this.password).then(() => {
+          this.email = "";
+          this.password = "";
+      })
+      .catch(e => {
+          this.isError = true;
+          this.errorMsg = "There has been an error.";
+      })
+      .then(() => {
+          this.resetForm();
+      });
   }
 
   logoutWithEmail() {
-      this.authService.logout();
+      this.authService.logout().then(() => {
+          this.resetForm();
+      });
+  }
+
+  private resetForm() {
+      this.email = "";
+      this.password = "";
+      this.isError = false;
+      this.errorMsg = "";
   }
 
 }
