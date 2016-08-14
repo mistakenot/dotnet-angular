@@ -7,7 +7,7 @@ import { NgRedux } from 'ng2-redux';
 if (environment.production) {
   enableProdMode();
 }
-
+ 
 bootstrap(
     AppComponent,
     [HTTP_PROVIDERS,
