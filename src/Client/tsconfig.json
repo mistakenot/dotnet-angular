@@ -10,7 +10,6 @@
         "declaration": false,
         "noImplicitAny": false,
         "noImplicitUseStrict": false,
-        "outFile": "tmp/app.js",
         "removeComments": true,
         "noLib": false,
         "preserveConstEnums": true,
@@ -22,7 +21,7 @@
         "typings/browser.d.ts"
     ],
     "compileOnSave": true,
-    "buildOnSave": true,
+    "buildOnSave": false,
     "atom": {
         "rewriteTsconfig": false
     }
