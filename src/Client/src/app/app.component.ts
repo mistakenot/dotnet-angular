@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
-import { NavBarComponent } from './components/nav/nav-bar'
+import { NavBarComponent } from './components/nav/nav-bar/nav-bar.component'
 import { AuthService, MockAuthService } from './services/auth.service';
 import { LogService, ILogService, ConsoleLogService } from './services/log.service';
-import { NgRedux } from 'ng2-redux';
+// import { NgRedux } from 'ng2-redux';
 import { IAppState } from './models'
 import { rootReducer } from './store';
 
@@ -17,12 +17,11 @@ import { rootReducer } from './store';
       { provide: LogService, useClass: ConsoleLogService }
   ]
 })
-export class AppComponent { 
+export class AppComponent {
   title = 'app works!';
 
-  constructor(
-      private ngRedux: NgRedux<IAppState>
-  ) {
-      this.ngRedux.configureStore(rootReducer, {})
+  constructor() {
+
   }
+
 }

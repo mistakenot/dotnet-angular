@@ -35,6 +35,7 @@
     "./app/services/auth.service.ts",
     "./app/services/log.service.spec.ts",
     "./app/services/log.service.ts",
+    "./app/store/collection.spec.ts",
     "./app/store/collection.ts",
     "./app/store/inbox-headers.reducers.ts",
     "./app/store/index.ts",
