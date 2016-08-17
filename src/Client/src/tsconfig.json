@@ -20,9 +20,11 @@
     "!node_modules/**/*.ts"
   ],
   "files": [
-    "./app/actions/index.ts",
     "./app/app.component.spec.ts",
     "./app/app.component.ts",
+    "./app/components/list/index.ts",
+    "./app/components/list/list.component.spec.ts",
+    "./app/components/list/list.component.ts",
     "./app/components/nav/nav-bar/index.ts",
     "./app/components/nav/nav-bar/nav-bar.component.spec.ts",
     "./app/components/nav/nav-bar/nav-bar.component.ts",
@@ -37,7 +39,6 @@
     "./app/services/log.service.ts",
     "./app/store/collection.spec.ts",
     "./app/store/collection.ts",
-    "./app/store/inbox-headers.reducers.ts",
     "./app/store/index.ts",
     "./main.ts",
     "./system-config.ts",

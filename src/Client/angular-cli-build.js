@@ -17,7 +17,9 @@ module.exports = function(defaults) {
       'rxjs/**/*.+(js|js.map)',
       '@angular/**/*.+(js|js.map)',
       'bootstrap/dist/**/*.+(js|js.map|css)',
-      'ng2-bootstrap/**/*.js'
+      'ng2-bootstrap/**/*.js',
+      'redux/dist/redux.min.js',
+      'typescript-collections/**/*.+(js|js.map)'
     ]
   });
 };

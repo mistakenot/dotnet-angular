@@ -8,7 +8,9 @@
 /** Map relative paths to URLs. */
 const map: any = {
     'ng2-bootstrap': 'vendor/ng2-bootstrap',
-    'bootstrap': 'vendor/bootstrap'
+    'bootstrap': 'vendor/bootstrap',
+    'redux': 'vendor/redux',
+    'typescript-collections': 'vendor/typescript-collections/dist/lib'
 };
 
 /** User packages configuration. */
@@ -17,6 +19,11 @@ const packages: any = {
         format: 'cjs',
         defaultExtension: 'js',
         main: 'ng2-bootstrap.js'
+    },
+    'typescript-collections': {
+        format: 'cjs',
+        defaultExtension: 'js',
+        main: 'index.js'
     }
 };
 
@@ -41,6 +48,7 @@ const barrels: string[] = [
   'app',
   'app/shared',
   'app/nav/nav-bar',
+  'app/components/list',
   /** @cli-barrel */
 ];
 
