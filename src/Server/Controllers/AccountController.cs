@@ -15,7 +15,7 @@ using Server.Services;
 namespace Server.Controllers
 {
     [Authorize]
-    [Route("/Account")]
+    [Route("/Account_Old")]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

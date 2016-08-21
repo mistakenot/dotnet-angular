@@ -15,7 +15,7 @@ using Server.Services;
 namespace Server.Controllers
 {
     [Authorize]
-    [Route("/AccountApi")]
+    [Route("/Account")]
     public class AccountApiController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;
@@ -58,7 +58,7 @@ namespace Server.Controllers
                 }
                 else
                 {
-                    return NotFound(model.Email);
+                    return NotFound($"User name '{model.Email}' not found.");
                 }
 
                 if (result.RequiresTwoFactor)
@@ -103,7 +103,7 @@ namespace Server.Controllers
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
-                    return Ok(user.Claims);
+                    return Created("", user.Claims);
                 }
                 AddErrors(result);
             }
@@ -122,6 +122,13 @@ namespace Server.Controllers
             await _signInManager.SignOutAsync();
             _logger.LogInformation(4, "User logged out.");
             return Ok();
+        }
+
+        [HttpGet]
+        [Route("")]
+        public async Task<IActionResult> Index()
+        {
+            return Ok(User.Identity);
         }
 
         //
