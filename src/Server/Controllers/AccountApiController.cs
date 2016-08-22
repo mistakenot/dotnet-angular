@@ -128,7 +128,7 @@ namespace Server.Controllers
         [Route("")]
         public async Task<IActionResult> Index()
         {
-            return Ok(User.Identity);
+            return Ok(User.Identity.AuthenticationType);
         }
 
         //

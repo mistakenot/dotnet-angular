@@ -36,9 +36,14 @@ namespace Server.Tests
                     "Cookie",
                     response.Headers.GetValues("Set-Cookie"));
 
+                foreach (var header in client.DefaultRequestHeaders.GetValues("Cookie"))
+                {
+                    Console.WriteLine(header);
+                }
+
                 // Check that it has worked
-                //response = await client.GetAsync("Account");
-                //Assert.True(response.IsSuccessStatusCode);
+                response = await client.GetAsync("Account");
+                Assert.True(response.IsSuccessStatusCode);
             }
         }
 

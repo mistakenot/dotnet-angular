@@ -22,6 +22,7 @@ namespace Server.Tests
         [Fact]
         public async Task CanLogout()
         {
+            //await Client.LoginAsync();
             //await Client.LogoutAsync();
         }
     }
